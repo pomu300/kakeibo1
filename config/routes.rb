@@ -7,4 +7,7 @@ Rails.application.routes.draw do
   # get "/books/:id", to: "books#show", as: "book"
   # patch "/books/:id", to: "books#update"
   # delete "/books/:id", to: "books#destroy"
+
+  get "/signup", to: "users#new"
+  post "/signup", to: "users#create"
 end

@@ -28,10 +28,19 @@
     <th>リンク</th>
   </tr>
   <% sum = 0 %>
+  <% income_sum = 0 %>
+  <% expense_sum = 0 %>
   <% @books.each do |book| %>
   <tr>
     <td><%= book.year %>年<%= book.month %>月</td>
-    <td><%= book.inout %></td>
+    <td>
+      <%= case book.inout
+      when 1
+        "収入"
+      when 2
+        "支出"
+      end %>
+    </td>
     <td><%= book.category %></td>
     <td><%= book.amount %>万円</td>
     <td>
@@ -42,10 +51,26 @@
   </tr>
     <% if book.inout == 1 %>
       <% sum += book.amount %>
+      <% income_sum += book.amount %> <!-- 収入の合計を計算 -->
     <% else %>
       <% sum -= book.amount %>
+      <% expense_sum += book.amount %> <!-- 支出の合計を計算 -->
     <% end %>
   <% end %>
+  <tr>
+    <td></td>
+    <td></td>
+    <td>収入合計</td>
+    <td><%= income_sum %>万円</td>
+    <td></td>
+  </tr>
+  <tr>
+    <td></td>
+    <td></td>
+    <td>支出合計</td>
+    <td><%= expense_sum %>万円</td>
+    <td></td>
+  </tr> 
   <tr>
     <td></td>
     <td></td>
