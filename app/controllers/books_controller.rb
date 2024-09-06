@@ -1,6 +1,7 @@
 class BooksController < ApplicationController
 
   before_action :set_book, only: [:show, :edit, :update, :destroy]
+  before_action :redirect_to_signin
 
   def index
     @books = Book.all
@@ -52,5 +53,9 @@ class BooksController < ApplicationController
 
   def set_book
     @book = Book.find(params[:id])
+  end
+
+  def redirect_to_signin
+    redirect_to signin_path if session[:user_id].blank?
   end
 end
