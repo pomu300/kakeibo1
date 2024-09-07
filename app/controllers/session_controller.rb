@@ -1,6 +1,6 @@
 class SessionController < ApplicationController
 
-  before_action :redirect_to_books
+  before_action :redirect_to_books, only: [:new, :create]
   
   def new
   end
@@ -15,6 +15,11 @@ class SessionController < ApplicationController
       flash.now[:alert] = "ログインに失敗しました"
       render "new"
     end
+  end
+
+  def destroy
+    session[:user_id] = nil
+    redirect_to signin_path
   end
 
   private
